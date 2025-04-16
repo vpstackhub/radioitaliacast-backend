@@ -16,7 +16,7 @@ const stations = [
   {
     id: 2,
     name: "Radio Italia",
-    streamUrl: "https://stream.rds.it/rds.it.mp3", // <-- we may need to fix this
+    streamUrl: "https://stream.rds.it/rds.it.mp3", 
     region: "Cologno Monzese",
     logo: "https://www.radioitalia.it/apple-touch-icon.png"
   },
