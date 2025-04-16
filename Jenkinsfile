@@ -1,40 +1,38 @@
 pipeline {
   agent any
 
-  environment {
-    IMAGE_NAME = 'vpstackhub/radioitaliacast-backend:1.0'
-  }
-
   stages {
-    stage('Clone') {
+    stage('Clone Repo') {
       steps {
-        git 'https://github.com/vpstackhub/radioitaliacast-backend.git'
+        git url: 'https://github.com/vpstackhub/radioitaliacast-backend.git', branch: 'main'
       }
     }
-    stage('Build Docker Image') {
+
+    stage('Build Image') {
       steps {
-        sh 'docker build -t $IMAGE_NAME .'
+        sh 'docker build -t vpstackhub/radioitaliacast-backend:1.0 .'
       }
     }
+
     stage('Push to Docker Hub') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-          sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-          sh 'docker push $IMAGE_NAME'
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+          sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+          sh 'docker push vpstackhub/radioitaliacast-backend:1.0'
         }
       }
     }
+
     stage('Deploy to EC2') {
       steps {
-        sshagent(['ec2-key']) {
-          sh '''
-          ssh -o StrictHostKeyChecking=no ec2-user@13.58.141.188 '
-            docker pull $IMAGE_NAME &&
-            docker stop radioitaliacast-backend || true &&
-            docker rm radioitaliacast-backend || true &&
-            docker run -d -p 3000:3000 --name radioitaliacast-backend $IMAGE_NAME
-          '
-          '''
+        sh '''
+        ssh -o StrictHostKeyChecking=no -i /path/to/your.pem ec2-user@13.58.141.188 '
+          docker stop radioitaliacast-backend || true &&
+          docker rm radioitaliacast-backend || true &&
+          docker pull vpstackhub/radioitaliacast-backend:1.0 &&
+          docker run -d -p 3000:3000 --name radioitaliacast-backend vpstackhub/radioitaliacast-backend:1.0
+        '
+        '''
       }
     }
   }
