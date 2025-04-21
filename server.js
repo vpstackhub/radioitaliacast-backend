@@ -11,35 +11,35 @@ const stations = [
     name: "Rai Radio 1",
     streamUrl: "https://icestreaming.rai.it/1.mp3",
     region: "Roma",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4f/RaiRadio1-logo.png"
+    logo: "https://th.bing.com/th/id/OIP.wfIFmhn35RYXjeLq499otgHaCi?w=350"
   },
   {
     id: 2,
     name: "Radio Italia",
     streamUrl: "https://stream.rds.it/rds.it.mp3", 
     region: "Cologno Monzese",
-    logo: "https://www.radioitalia.it/apple-touch-icon.png"
+    logo: "https://cultura.biografieonline.it/wp-content/uploads/2012/11/Rismi.jpg"
   },
   {
     id: 3,
     name: "RTL 102.5",
     streamUrl: "https://streamingv2.shoutcast.com/rtl-1025",
     region: "Milano",
-    logo: "https://www.rtl.it/static/logos/rtl_logo_512.png"
+    logo: "https://th.bing.com/th/id/OIP.G9bScaxMOelIzA0geu940AHaHa?w=250&h=250&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.5&pid=3.1&rm=2"
   },
   {
     id: 4,
     name: "Radio Kiss Kiss",
     streamUrl: "https://ice02.fluidstream.net/KissKiss.mp3",
     region: "Napoli",
-    logo: "https://www.kisskiss.it/wp-content/uploads/2021/11/favicon.png"
+    logo: "https://th.bing.com/th/id/OIP.KekJjU7kc2uXfUlXa_R9EwHaF3?w=280&h=222&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.5&pid=3.1&rm=2"
   },
   {
     id: 5,
     name: "Radio 105",
     streamUrl: "https://icecast.unitedradio.it/Radio105.mp3",
     region: "Milano",
-    logo: "https://play-lh.googleusercontent.com/9GivbqaOEjjKqNT99bQ6gJbhD5BA7QEvLknL9oTOq38Zub_KaEkfDAp9Wo3LoJvM7YY"
+    logo: "https://th.bing.com/th/id/OIP.dTcT_S2yRGBeGNnwEUA40gAAAA?w=245&h=254&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.5&pid=3.1&rm=2"
   }
 ];
 
