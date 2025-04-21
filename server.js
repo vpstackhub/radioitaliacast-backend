@@ -65,7 +65,7 @@ const stations = [
   {
     id: 9,
     name: "Rai Isoradio",
-    streamUrl: "https://www.raiplaysound.it/isoradio",
+    streamUrl: "https://icestreaming.rai.it/isoradio.mp3",
     region: "Italia",
     logo: "https://th.bing.com/th/id/OIP.T4TN-TTs4ZahGhFdr_gDaAHaFa?w=292&h=213&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2"
   },
