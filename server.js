@@ -2,6 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const PORT = 3000;
+const http = require('http');
+const https = require('https');
+const fetch = require('node-fetch');
+
+
 
 app.use(cors());
 
@@ -85,6 +90,33 @@ app.get('/', (req, res) => {
 
 app.get('/api/stations', (req, res) => {
   res.json(stations);
+});
+
+const agent = new https.Agent({
+  family: 4 // ✅ Force IPv4 DNS resolution
+});
+
+app.get('/proxy', async (req, res) => {
+  const streamUrl = req.query.url;
+  if (!streamUrl) return res.status(400).send('Missing stream URL');
+
+  // Determine if we need to force IPv4 for HTTPS only
+  const fetchOptions = {
+    headers: { 'User-Agent': 'Mozilla/5.0' }
+  };
+
+  if (streamUrl.startsWith('https')) {
+    fetchOptions.agent = new https.Agent({ family: 4 }); // ✅ Only apply agent to HTTPS
+  }
+
+  try {
+    const response = await fetch(streamUrl, fetchOptions);
+    res.set('Content-Type', response.headers.get('content-type') || 'audio/mpeg');
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Proxy error:', error.message);
+    res.status(500).send('Proxy failed: ' + error.message);
+  }
 });
 
 app.listen(PORT, () => {
